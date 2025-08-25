@@ -3,6 +3,8 @@ package com.example.diario.api.Entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "note")
 public class NoteEntity {
@@ -10,15 +12,36 @@ public class NoteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT", unique = false)
+    @Column(columnDefinition = "LONGTEXT")
     private String text;
+
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime data;
 
     @Lob
     @Column( columnDefinition = "LONGBLOB")
     private byte[] image;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
+    @PrePersist
+    protected void onCreate() {
+        this.data = LocalDateTime.now();
+    }
+
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -51,9 +74,7 @@ public class NoteEntity {
     public void setImage(byte[] image) {
         this.image = image;
     }
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+
 
     public UserEntity getUser() {
         return user;

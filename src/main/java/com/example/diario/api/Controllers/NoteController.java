@@ -4,6 +4,7 @@ package com.example.diario.api.Controllers;
 
 import com.example.diario.api.Entities.NoteEntity;
 import com.example.diario.api.Services.NoteService;
+import lombok.Data;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,7 +57,6 @@ public class NoteController {
     }
 
 
-
     @PutMapping(value = "{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public List<NoteEntity> putNoteEntity(
             @PathVariable Long id,
@@ -71,6 +71,7 @@ public class NoteController {
         noteService.updateNote(id, noteEntity);
         return noteService.getAllNotes();
     }
+
 
 }
 

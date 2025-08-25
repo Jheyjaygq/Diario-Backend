@@ -4,7 +4,6 @@ import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 import java.util.Date;
 import io.jsonwebtoken.security.Keys;
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 
 @Component

@@ -7,6 +7,8 @@ import com.example.diario.api.Repositories.NoteRepository;
 import com.example.diario.api.Repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,6 +26,7 @@ public class NoteService {
 
     public NoteEntity postNote(NoteEntity noteEntity) {
         noteEntity.setUser(getAuthenticatedUser());
+        noteEntity.setData(LocalDateTime.now());
         return noteRepository.save(noteEntity);
     }
 
